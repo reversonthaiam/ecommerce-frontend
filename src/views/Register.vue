@@ -1,21 +1,21 @@
 <template>
   <div class="min-h-screen bg-gray-100 flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md w-96">
-      <h1 class="text-2xl font-bold text-center mb-6">Criar conta</h1>
+      <h1 class="text-2xl font-bold text-center mb-6">Create account</h1>
       <form @submit.prevent="handleRegister" class="flex flex-col gap-4">
         <input v-model="email" type="email" placeholder="Email"
           class="border rounded p-2 outline-none focus:border-blue-500" />
-        <input v-model="password" type="password" placeholder="Senha"
+        <input v-model="password" type="password" placeholder="Password"
           class="border rounded p-2 outline-none focus:border-blue-500" />
-        <input v-model="passwordConfirmation" type="password" placeholder="Confirmar senha"
+        <input v-model="passwordConfirmation" type="password" placeholder="Confirm password"
           class="border rounded p-2 outline-none focus:border-blue-500" />
         <button type="submit" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-          Criar conta
+          Create account
         </button>
       </form>
       <p class="text-center mt-4 text-sm">
-        Já tem conta?
-        <router-link to="/login" class="text-blue-500 hover:underline">Entrar</router-link>
+        Already have an account?
+        <router-link to="/login" class="text-blue-500 hover:underline">Sign in</router-link>
       </p>
       <p v-if="error" class="text-red-500 text-center mt-2">{{ error }}</p>
     </div>
@@ -40,7 +40,7 @@ async function handleRegister() {
     await authStore.register(email.value, password.value, passwordConfirmation.value)
     router.push('/login')
   } catch (e) {
-    error.value = 'Erro ao criar conta'
+    error.value = 'Error creating account'
   }
 }
 </script>

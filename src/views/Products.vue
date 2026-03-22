@@ -1,6 +1,8 @@
 <template>
   <div class="p-8">
-    <h1 class="text-2xl font-bold mb-6">Escolha seu produto</h1>
+    <h1 class="text-2xl font-bold mb-6">Choose your product</h1>
+
+    <p v-if="message" class="mb-4 text-green-500">{{ message }}</p>
 
     <section class="grid grid-cols-3 gap-4">
       <div v-for="product in products" :key="product.id" class="bg-white rounded-lg shadow p-4">
@@ -9,10 +11,9 @@
           <p class="text-gray-500">R$ {{ product.price }}</p>
         </div>
         <button @click="handleBuy(product.id)" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-          Comprar
+          Buy
         </button>
       </div>
-      <p v-if="message" class="mb-4 text-green-500">{{ message }}</p>
     </section>
   </div>
 </template>
@@ -38,10 +39,9 @@ const handleBuy = async (id: number) => {
         ]
       }
     })
-    message.value = 'Pedido realizado com sucesso!'
+    message.value = 'Order placed successfully!'
   } catch (e) {
-    message.value = 'Erro ao realizar pedido'
+    message.value = 'Error placing order'
   }
 }
-
 </script>

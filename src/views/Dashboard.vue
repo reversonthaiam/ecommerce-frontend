@@ -4,19 +4,19 @@
 
     <div class="grid grid-cols-3 gap-4">
       <div class="bg-white rounded-lg shadow p-4">
-        <h2 class="font-bold text-gray-500 mb-2">Total de vendas hoje</h2>
+        <h2 class="font-bold text-gray-500 mb-2">Total sales today</h2>
         <p class="text-2xl font-bold">R$ {{ dashboardData.total_sales_today }}</p>
       </div>
 
       <div class="bg-white rounded-lg shadow p-4">
-        <h2 class="font-bold text-gray-500 mb-2">Produtos mais vendidos</h2>
+        <h2 class="font-bold text-gray-500 mb-2">Best selling products</h2>
         <div v-for="(quantity, name) in dashboardData.best_selling_products" :key="name">
-          <p>{{ name }}: {{ quantity }} unidades</p>
+          <p>{{ name }}: {{ quantity }} units</p>
         </div>
       </div>
 
       <div class="bg-white rounded-lg shadow p-4">
-        <h2 class="font-bold text-gray-500 mb-2">Receita por categoria</h2>
+        <h2 class="font-bold text-gray-500 mb-2">Revenue by category</h2>
         <div v-for="(revenue, name) in dashboardData.revenue_by_category" :key="name">
           <p>{{ name }}: R$ {{ revenue }}</p>
         </div>

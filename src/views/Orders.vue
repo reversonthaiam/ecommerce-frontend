@@ -1,6 +1,6 @@
 <template>
   <div class="p-8">
-    <h1 class="text-2xl font-bold mb-6">Meus Pedidos</h1>
+    <h1 class="text-2xl font-bold mb-6">My Orders</h1>
 
     <div class="flex flex-col gap-4">
       <div v-for="order in orders" :key="order.id" class="bg-white rounded-lg shadow p-4">
