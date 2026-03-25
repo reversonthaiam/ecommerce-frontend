@@ -1,23 +1,68 @@
 <template>
-  <div class="min-h-screen bg-gray-100 flex items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-md w-96">
-      <h1 class="text-2xl font-bold text-center mb-6">Create account</h1>
-      <form @submit.prevent="handleRegister" class="flex flex-col gap-4">
-        <input v-model="email" type="email" placeholder="Email"
-          class="border rounded p-2 outline-none focus:border-blue-500" />
-        <input v-model="password" type="password" placeholder="Password"
-          class="border rounded p-2 outline-none focus:border-blue-500" />
-        <input v-model="passwordConfirmation" type="password" placeholder="Confirm password"
-          class="border rounded p-2 outline-none focus:border-blue-500" />
-        <button type="submit" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-          Create account
-        </button>
-      </form>
-      <p class="text-center mt-4 text-sm">
-        Already have an account?
-        <router-link to="/login" class="text-blue-500 hover:underline">Sign in</router-link>
-      </p>
-      <p v-if="error" class="text-red-500 text-center mt-2">{{ error }}</p>
+  <div class="min-h-screen bg-brand-dark flex items-center justify-center p-6 select-none overflow-hidden">
+
+    <div class="relative w-full max-w-[440px]">
+      <div class="absolute -top-20 -right-20 w-48 h-48 bg-brand-pink rounded-full blur-[100px] opacity-10"></div>
+      <div class="absolute -bottom-20 -left-20 w-48 h-48 bg-brand-purple rounded-full blur-[100px] opacity-10"></div>
+
+      <div
+        class="relative bg-brand-purple-dark/10 backdrop-blur-2xl border border-brand-purple-dark/30 p-10 rounded-[2.5rem] shadow-2xl">
+
+        <header class="text-center mb-8">
+          <h1 class="text-4xl font-black text-brand-pink-pale tracking-tighter mb-2">
+            Join <span class="text-brand-pink">Us.</span>
+          </h1>
+          <p class="text-brand-pink-pale/50 text-sm font-medium">Create your administrative account</p>
+        </header>
+
+        <form @submit.prevent="handleRegister" class="flex flex-col gap-5">
+          <div class="flex flex-col gap-2">
+            <label class="text-xs font-bold uppercase tracking-widest text-brand-pink/60 ml-1">Email</label>
+            <input v-model="email" type="email" placeholder="admin@dashboard.com"
+              class="bg-brand-dark/40 border border-brand-purple-dark/50 text-white p-4 rounded-2xl outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink/30 transition-all placeholder:text-white/10"
+              required />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label class="text-xs font-bold uppercase tracking-widest text-brand-pink/60 ml-1">Password</label>
+            <input v-model="password" type="password" placeholder="••••••••"
+              class="bg-brand-dark/40 border border-brand-purple-dark/50 text-white p-4 rounded-2xl outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink/30 transition-all placeholder:text-white/10"
+              required />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label class="text-xs font-bold uppercase tracking-widest text-brand-pink/60 ml-1">Confirm Password</label>
+            <input v-model="passwordConfirmation" type="password" placeholder="••••••••"
+              class="bg-brand-dark/40 border border-brand-purple-dark/50 text-white p-4 rounded-2xl outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink/30 transition-all placeholder:text-white/10"
+              required />
+          </div>
+
+          <button type="submit"
+            class="group relative bg-brand-pink text-brand-dark font-black p-4 rounded-2xl mt-2 overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-brand-pink/20">
+            <div
+              class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+            </div>
+            <span class="relative">Create Account</span>
+          </button>
+        </form>
+
+        <footer class="mt-8 text-center">
+          <p class="text-brand-pink-pale/40 text-sm">
+            Already have an account?
+            <router-link to="/login"
+              class="text-brand-pink hover:text-brand-pink-pale font-bold transition-colors underline underline-offset-4">
+              Sign in here
+            </router-link>
+          </p>
+
+          <Transition name="slide-up">
+            <p v-if="error"
+              class="bg-red-500/10 border border-red-500/20 text-red-400 text-xs py-3 px-4 rounded-xl mt-6 font-medium">
+              {{ error }}
+            </p>
+          </Transition>
+        </footer>
+      </div>
     </div>
   </div>
 </template>
@@ -36,11 +81,28 @@ const passwordConfirmation = ref('')
 const error = ref('')
 
 async function handleRegister() {
+  error.value = ''
   try {
     await authStore.register(email.value, password.value, passwordConfirmation.value)
     router.push('/login')
   } catch (e) {
-    error.value = 'Error creating account'
+    error.value = 'Failed to create account. Please check the information provided.'
   }
 }
 </script>
+
+<style scoped>
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.slide-up-leave-to {
+  opacity: 0;
+}
+</style>
