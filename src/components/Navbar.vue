@@ -3,7 +3,7 @@
     class="sticky top-0 z-50 bg-brand-dark/80 backdrop-blur-xl border-b border-brand-purple-dark/30 px-8 py-5 flex justify-between items-center transition-all duration-300">
 
     <div class="flex items-center gap-12">
-      <router-link to="/dashboard" class="group flex items-center gap-2">
+      <router-link to="/products" class="group flex items-center gap-2">
         <div
           class="w-8 h-8 bg-brand-pink rounded-lg shadow-[0_0_15px_rgba(250,166,255,0.4)] group-hover:rotate-12 transition-transform duration-300">
         </div>
@@ -39,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 
@@ -46,12 +47,19 @@ const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
 
-const navLinks = [
-  { label: 'Dashboard', path: '/dashboard' },
-  { label: 'Orders', path: '/orders' },
-  { label: 'Products', path: '/products' },
-  { label: 'New Product', path: '/newProducts' },
-]
+const navLinks = computed(() => {
+  const links = [
+    { label: 'Products', path: '/products' },
+    { label: 'Orders', path: '/orders' },
+  ]
+
+  if (authStore.user?.role === 'admin') {
+    links.push({ label: 'Dashboard', path: '/dashboard' })
+    links.push({ label: 'New Product', path: '/products/new' })
+  }
+
+  return links
+})
 
 function handleLogout() {
   authStore.logout()
@@ -60,7 +68,6 @@ function handleLogout() {
 </script>
 
 <style scoped>
-/* Estilo para o link ativo do Vue Router */
 .router-link-active {
   color: var(--color-brand-pink) !important;
 }

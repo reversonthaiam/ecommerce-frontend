@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-brand-dark flex items-center justify-center p-6 select-none">
 
     <div class="relative w-full max-w-[400px]">
-
+      <project-modal />
       <div class="absolute -top-10 -left-10 w-32 h-32 bg-brand-purple rounded-full blur-[80px] opacity-20"></div>
       <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-brand-pink rounded-full blur-[80px] opacity-20"></div>
 
@@ -65,6 +65,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
+import ProjectModal from '@/components/ProjectModal.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
