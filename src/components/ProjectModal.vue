@@ -13,12 +13,27 @@
           </h2>
         </div>
 
-        <p class="text-brand-pink-pale/70 font-medium leading-relaxed mb-8">
+        <p class="text-brand-pink-pale/70 font-medium leading-relaxed mb-6">
           A full-stack e-commerce platform built as a portfolio project, demonstrating modern backend and frontend
           architecture.
         </p>
 
-        <div class="mb-8">
+        <div class="mb-6 p-4 rounded-2xl bg-brand-purple-dark/20 border border-brand-pink/20">
+          <p class="text-xs font-black uppercase tracking-widest text-brand-pink/60 mb-3">Admin Access</p>
+          <div class="flex flex-col gap-2">
+            <div class="flex justify-between items-center">
+              <span class="text-brand-pink-pale/50 text-sm font-medium">Email</span>
+              <span class="text-brand-pink font-black text-sm">admin@admin.com</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-brand-pink-pale/50 text-sm font-medium">Password</span>
+              <span class="text-brand-pink font-black text-sm">123456</span>
+            </div>
+            <p class="text-brand-pink-pale/30 text-xs mt-1">→ Access dashboard and manage products</p>
+          </div>
+        </div>
+
+        <div class="mb-6">
           <p class="text-xs font-black uppercase tracking-widest text-brand-pink/60 mb-4">Tech Stack</p>
           <div class="flex flex-wrap gap-2">
             <span v-for="tech in techs" :key="tech"
