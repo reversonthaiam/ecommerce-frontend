@@ -38,9 +38,10 @@
 
 <script setup lang="ts">
 import api from '@/services/api'
+import type { Order } from '@/types/Order'
 import { onMounted, ref } from 'vue'
 
-const orders = ref([])
+const orders = ref<Order[]>([])
 
 onMounted(async () => {
   try {

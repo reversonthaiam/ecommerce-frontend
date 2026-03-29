@@ -58,8 +58,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import api from '@/services/api'
+import type { Product } from '@/types/Product'
 
-const products = ref([])
+const products = ref<Product[]>([])
 const message = ref('')
 
 onMounted(async () => {
