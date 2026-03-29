@@ -1,17 +1,17 @@
 <template>
   <div class="min-h-screen bg-brand-dark p-8 pb-20 flex flex-col items-center">
-
     <header class="w-full max-w-2xl mb-12 text-center">
       <h1 class="text-4xl font-black text-brand-pink-pale tracking-tighter">
         New <span class="text-brand-pink">Inventory</span> Item
       </h1>
-      <p class="text-brand-pink-pale/40 font-medium">Add high-performance products to your catalog</p>
+      <p class="text-brand-pink-pale/40 font-medium">
+        Add high-performance products to your catalog
+      </p>
     </header>
 
     <section class="w-full max-w-2xl">
       <form @submit.prevent="handleCreateNewProduct"
         class="bg-brand-purple-dark/10 backdrop-blur-xl border border-brand-purple-dark/30 p-10 rounded-[2.5rem] shadow-2xl flex flex-col gap-6">
-
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="flex flex-col gap-2 md:col-span-2">
             <label class="text-xs font-bold uppercase tracking-[0.15em] text-brand-pink/60 ml-1">Product Name</label>
@@ -56,7 +56,8 @@
               <p class="text-brand-pink-pale font-bold text-sm">
                 {{ imageFile ? imageFile.name : 'Click to upload image' }}
               </p>
-              <p class="text-brand-pink-pale/30 text-[10px] mt-1 uppercase tracking-widest">PNG, JPG or WEBP (Max 5MB)
+              <p class="text-brand-pink-pale/30 text-[10px] mt-1 uppercase tracking-widest">
+                PNG, JPG or WEBP (Max 5MB)
               </p>
             </div>
           </label>
@@ -109,13 +110,18 @@ const handleCreateNewProduct = async () => {
       formData.append('product[image]', imageFile.value)
     }
 
-    await api.post('/products', formData)
+    await api.post('/products', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
 
     alert('Product deployed to nexus successfully!')
-
-    name.value = ''; price.value = ''; stock.value = '';
-    category_id.value = ''; imageFile.value = null
-
+    name.value = ''
+    price.value = ''
+    stock.value = ''
+    category_id.value = ''
+    imageFile.value = null
   } catch (error) {
     alert('Deployment failed. Check system logs.')
   }
